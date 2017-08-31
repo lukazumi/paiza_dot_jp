@@ -1,0 +1,39 @@
+﻿# coding: utf-8
+# Luke Jackson 2017
+
+NumberOfCC = input_lines = input()
+CCs =[]
+cc = input()
+output=""
+while cc is not None :
+    CCs.append(cc)
+    
+    try:
+        cc = input()
+    except :
+        break
+
+#print(CCs)
+
+
+for cc in CCs :
+    FxCC =[]
+    for i in range(0,15) :
+        if i %2 ==0:
+            d = (int(cc[i])*2)
+            if d >9 :
+                ds = str(d)
+                dt = int(ds[0])
+                do = int(ds[1])
+                d = dt+do
+            FxCC.append(d)
+        else :
+            FxCC.append(int(cc[i]))
+    Fxsum =0
+    for i in FxCC :
+        Fxsum=Fxsum+i
+    nearestTen = (Fxsum + 9) // 10 * 10
+    lastDigit = nearestTen - Fxsum
+    output=output+str(lastDigit)+"\n"
+    
+print(output)

@@ -1,0 +1,47 @@
+﻿# coding: utf-8
+# Luke Jackson 2017
+
+import argparse
+import sys
+
+
+def run_p(_cc):
+    if len(_cc) is not 16:
+        raise ValueError("cc must be 16 chars long")
+
+    CCs = [_cc]
+    output = ""
+    for cc in CCs:
+        FxCC = []
+        for i in range(0, 15):
+            if i % 2 == 0:
+                d = (int(cc[i]) * 2)
+                if d > 9:
+                    ds = str(d)
+                    dt = int(ds[0])
+                    do = int(ds[1])
+                    d = dt + do
+                FxCC.append(d)
+            else:
+                FxCC.append(int(cc[i]))
+        Fxsum = 0
+        for i in FxCC:
+            Fxsum = Fxsum + i
+        nearestTen = (Fxsum + 9) // 10 * 10
+        lastDigit = nearestTen - Fxsum
+        output = output + str(lastDigit) + "\n"
+
+    print(output)
+
+
+def parse_arguments(argv):
+    parser = argparse.ArgumentParser()
+    parser.add_argument('-cc_num', type=str,
+                        help='Credit card number ending in X, 16 digits long. eg "628381026148991X"',
+                        required=True)
+    return parser.parse_args(argv)
+
+
+if __name__ == "__main__":
+    arg = parse_arguments(sys.argv[1:])
+    run_p(arg.cc_num)

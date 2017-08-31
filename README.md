@@ -1,0 +1,1 @@
+My solutions to problems from the japanese coding site Piaza (similar to Project Eula)
